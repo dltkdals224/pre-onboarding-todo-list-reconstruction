@@ -5,7 +5,7 @@ import { ThemeProvider } from "styled-components";
 import App from "./App";
 
 import GlobalStyle from "./shared/GlobalStyle";
-import theme from "./shared/theme";
+import theme from "./shared/Theme";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
