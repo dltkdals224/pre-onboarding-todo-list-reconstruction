@@ -1,9 +1,11 @@
-const SignIn = () => {
+import styled, { css } from "styled-components";
+
+const SignIn = ({ isDefaultForm }: { isDefaultForm: any }) => {
   return (
-    <div className="form-container sign-in-container">
-      <form>
+    <Section className="sign-in-container" isDefaultForm={isDefaultForm}>
+      <SignInForm>
         <h1>Sign in</h1>
-        <div className="social-container">
+        <SocialContainer className="social-container">
           <a className="social">
             <i className="fab fa-facebook-f"></i>
           </a>
@@ -13,15 +15,97 @@ const SignIn = () => {
           <a className="social">
             <i className="fab fa-linkedin-in"></i>
           </a>
-        </div>
+        </SocialContainer>
         <span>or use your account</span>
-        <input type="email" placeholder="Email" />
-        <input type="password" placeholder="Password" />
-        <a>Forgot your password?</a>
-        <button>Sign In</button>
-      </form>
-    </div>
+        <SignInInput type="email" placeholder="Email" />
+        <SignInInput type="password" placeholder="Password" />
+        <SignInButton>Sign In</SignInButton>
+      </SignInForm>
+    </Section>
   );
 };
 
 export default SignIn;
+
+const Section = styled.section<{ isDefaultForm: any }>`
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 50%;
+  height: 100%;
+
+  transition: all 0.6s ease-in-out;
+
+  z-index: 2;
+
+  ${(props) =>
+    props.isDefaultForm &&
+    css`
+      transform: translateX(100%);
+    `}
+`;
+
+const SignInForm = styled.form`
+  ${(props) => props.theme.FLEX_CENTER}
+  flex-direction: column;
+
+  height: 100%;
+
+  padding: 0 50px;
+
+  text-align: center;
+`;
+
+const SocialContainer = styled.div`
+  margin: 20px 0;
+
+  a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 40px;
+    height: 40px;
+
+    margin: 0 5px;
+
+    border: 1px solid #dddddd;
+    border-radius: 50%;
+  }
+`;
+
+const SignInInput = styled.input`
+  width: 100%;
+
+  padding: 12px 15px;
+  margin: 8px 0;
+
+  background-color: #eee;
+  border: none;
+`;
+
+const SignInButton = styled.button`
+  padding: 12px 45px;
+  margin-top: 24px;
+
+  border-radius: 20px;
+  border: 1px solid #ff4b2b;
+  background-color: #ff4b2b;
+
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+
+  transition: transform 80ms ease-in;
+
+  :active {
+    transform: scale(0.95);
+  }
+
+  :focus {
+    outline: none;
+  }
+`;

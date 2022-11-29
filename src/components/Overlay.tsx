@@ -1,28 +1,125 @@
-const Overlay = () => {
+import styled, { css } from "styled-components";
+
+const Overlay = ({
+  isDefaultForm,
+  setSignInForm,
+  setSignUpForm,
+}: {
+  isDefaultForm: any;
+  setSignInForm: any;
+  setSignUpForm: any;
+}) => {
+  const handleClick = () => {
+    if (isDefaultForm) {
+      setSignUpForm();
+    }
+    if (!isDefaultForm) {
+      setSignInForm();
+    }
+  };
   return (
-    <div className="container" id="container">
-      <div className="overlay-container">
-        <div className="overlay">
-          <div className="overlay-panel overlay-left">
-            <h1>Welcome Back!</h1>
-            <p>
-              To keep connected with us please login with your personal info
-            </p>
-            <button className="ghost" id="signIn">
-              Sign In
-            </button>
-          </div>
-          <div className="overlay-panel overlay-right">
-            <h1>Hello, Friend!</h1>
-            <p>Enter your personal details and start journey with us</p>
-            <button className="ghost" id="signUp">
-              Sign Up
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <Section className="overlay-container" isDefaultForm={isDefaultForm}>
+      <Wrapper className="overlay">
+        <OverlayPanel>
+          <h1>
+            {isDefaultForm
+              ? `Have you already signed up?`
+              : `Hello, Is this your first visit?`}
+          </h1>
+          <p>this todolist made by Sangmin</p>
+          <OverlayButton onClick={handleClick}>
+            {isDefaultForm ? `SIGN IN` : `SIGN UP`}
+          </OverlayButton>
+        </OverlayPanel>
+      </Wrapper>
+    </Section>
   );
 };
 
 export default Overlay;
+
+const Section = styled.section<{ isDefaultForm: any }>`
+  position: absolute;
+  top: 0;
+
+  left: 50%;
+  width: 50%;
+  height: 100%;
+
+  transition: transform 0.6s ease-in-out;
+  z-index: 100;
+
+  overflow: hidden;
+
+  ${(props) =>
+    props.isDefaultForm &&
+    css`
+      transform: translateX(-100%);
+    `}
+`;
+
+const Wrapper = styled.div`
+  position: relative;
+  left: -100%;
+
+  height: 100%;
+  width: 200%;
+
+  background: #ff416c;
+  background: -webkit-linear-gradient(to right, #ff4b2b, #ff416c);
+  background: linear-gradient(to right, #ff4b2b, #ff416c);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 0 0;
+  color: #ffffff;
+
+  transform: translateX(0);
+  transition: transform 0.6s ease-in-out;
+
+  right: 0;
+  transform: translateX(0);
+`;
+
+const OverlayPanel = styled.div`
+  position: absolute;
+  ${(props) => props.theme.FLEX_CENTER}
+  flex-direction: column;
+  top: 0;
+
+  width: 50%;
+  height: 100%;
+
+  padding: 0 40px;
+
+  text-align: center;
+
+  transform: translateX(0);
+  transition: transform 0.6s ease-in-out;
+
+  right: 0;
+  transform: translateX(0);
+`;
+
+const OverlayButton = styled.button`
+  border-radius: 20px;
+  border: 1px solid #ff4b2b;
+  background-color: #ff4b2b;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
+
+  background-color: transparent;
+  border-color: #ffffff;
+
+  :active {
+    transform: scale(0.95);
+  }
+
+  :focus {
+    outline: none;
+  }
+`;
