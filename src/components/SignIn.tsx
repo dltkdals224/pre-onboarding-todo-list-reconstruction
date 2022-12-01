@@ -1,25 +1,61 @@
 import styled, { css } from "styled-components";
+import { useForm } from "react-hook-form";
 
 const SignIn = ({ isDefaultForm }: { isDefaultForm: any }) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { isSubmitting, isDirty, errors },
+  } = useForm();
+
   return (
     <Section className="sign-in-container" isDefaultForm={isDefaultForm}>
-      <SignInForm>
+      <SignInForm
+        onSubmit={handleSubmit(async (data) => {
+          await new Promise((r) => setTimeout(r, 500));
+          alert(JSON.stringify(data));
+        })}
+      >
         <h1>Sign in</h1>
         <SocialContainer className="social-container">
-          <a className="social">
+          <a>
             <i className="fab fa-facebook-f"></i>
           </a>
-          <a className="social">
+          <a>
             <i className="fab fa-google-plus-g"></i>
           </a>
-          <a className="social">
+          <a>
             <i className="fab fa-linkedin-in"></i>
           </a>
         </SocialContainer>
+
         <span>or use your account</span>
-        <SignInInput type="email" placeholder="Email" />
-        <SignInInput type="password" placeholder="Password" />
-        <SignInButton>Sign In</SignInButton>
+        <SignInInput
+          placeholder="Email"
+          aria-invalid={!isDirty ? undefined : errors.email ? "true" : "false"}
+          {...register("email", {
+            required: true,
+            pattern: {
+              value: /\S+@\S+\.\S+/,
+              message: "이메일 형식에 맞지 않습니다.",
+            },
+          })}
+        />
+        {errors.email && <>{errors.email.message}</>}
+
+        <SignInInput
+          type="password"
+          placeholder="Password"
+          aria-invalid={
+            !isDirty ? undefined : errors.passwrod ? "true" : "false"
+          }
+          {...register("password", {
+            required: true,
+          })}
+        />
+        {errors.password && <>{errors.password.message}</>}
+
+        <SignInButton disabled={isSubmitting}>Sign In</SignInButton>
       </SignInForm>
     </Section>
   );

@@ -1,39 +1,24 @@
 import styled, { css } from "styled-components";
-import { useForm, Resolver } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 const SignUp = ({ isDefaultForm }: { isDefaultForm: any }) => {
-  type FormValues = {
-    email: string;
-    password: string;
-    reconfirmPassword: string;
-  };
-
-  const resolver: Resolver<FormValues> = async (values) => {
-    return {
-      values: values ?? {},
-      errors: !values.email
-        ? {
-            error: {
-              type: "required",
-              message: "This is required.",
-            },
-          }
-        : {},
-    };
-  };
-
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm<FormValues>({ resolver });
+    formState: { isSubmitting, isDirty, errors },
+  } = useForm();
+
+  const onValid = async (data: any) => {
+    await new Promise((r) => setTimeout(r, 500));
+    console.log(data);
+    alert(JSON.stringify(data));
+
+    // passwordReconfirm 확인 로직
+  };
 
   return (
-    <Section
-      isDefaultForm={isDefaultForm}
-      onSubmit={handleSubmit((data) => console.log(JSON.stringify(data)))}
-    >
-      <SignUpForm>
+    <Section isDefaultForm={isDefaultForm}>
+      <SignUpForm onSubmit={handleSubmit(onValid)}>
         <h1>Create Account</h1>
         <SocialContainer>
           <a>
@@ -46,14 +31,54 @@ const SignUp = ({ isDefaultForm }: { isDefaultForm: any }) => {
             <i className="fab fa-linkedin-in"></i>
           </a>
         </SocialContainer>
+
         <span>or use your email for registration</span>
-        <SignUpInput placeholder="Email" {...register("email")} />
-        <SignUpInput placeholder="Password" {...register("password")} />
         <SignUpInput
-          placeholder="Reconfirm Password"
-          {...register("reconfirmPassword")}
+          placeholder="Email"
+          aria-invalid={!isDirty ? undefined : errors.email ? "true" : "false"}
+          {...register("email", {
+            required: true,
+            pattern: {
+              value: /\S+@\S+\.\S+/,
+              message: "이메일 형식에 맞지 않습니다.",
+            },
+          })}
         />
-        <SignUpButton>Sign Up</SignUpButton>
+        {errors.email && <>{errors.email.message}</>}
+
+        <SignUpInput
+          type="password"
+          placeholder="Password"
+          aria-invalid={
+            !isDirty ? undefined : errors.passwrod ? "true" : "false"
+          }
+          {...register("password", {
+            required: true,
+            minLength: {
+              value: 8,
+              message: "8자리 이상의 비밀번호를 입력해주세요.",
+            },
+          })}
+        />
+        {errors.password && <>{errors.password.message}</>}
+
+        <SignUpInput
+          type="password"
+          placeholder="Password Reconfirm"
+          aria-invalid={
+            !isDirty ? undefined : errors.passwordReconfirm ? "true" : "false"
+          }
+          {...register("passwordReconfirm", {
+            required: true,
+            minLength: {
+              value: 8,
+              message: "8자리 이상의 비밀번호를 입력해주세요.",
+            },
+          })}
+        />
+        {errors.passwordReconfirm && <>{errors.passwordReconfirm.message}</>}
+
+        <SignUpButton disabled={isSubmitting}>Sign Up</SignUpButton>
       </SignUpForm>
     </Section>
   );
