@@ -10,7 +10,7 @@ export const Article = styled.article`
 export const InnerArticle = styled.article`
   position: relative;
 
-  width: 768px;
+  min-width: 768px;
   max-width: 100%;
   min-height: 480px;
 
@@ -19,4 +19,9 @@ export const InnerArticle = styled.article`
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 
   overflow: hidden;
+
+  animation: fadein 2s;
+  -moz-animation: fadein 2s; /* Firefox */
+  -webkit-animation: fadein 2s; /* Safari and Chrome */
+  -o-animation: fadein 2s; /* Opera */
 `;

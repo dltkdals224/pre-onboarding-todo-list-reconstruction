@@ -10,4 +10,5 @@ export default {
 
   BLACK: "#00000",
   WHITE: "#FFFFF",
+  R_1: "#FF4B2B",
 };

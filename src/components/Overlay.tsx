@@ -101,19 +101,20 @@ const OverlayPanel = styled.div`
 `;
 
 const OverlayButton = styled.button`
-  border-radius: 20px;
+  padding: 12px 45px;
+
   border: 1px solid #ff4b2b;
+  border-radius: 20px;
+  border-color: #ffffff;
   background-color: #ff4b2b;
   color: #ffffff;
   font-size: 12px;
   font-weight: bold;
-  padding: 12px 45px;
   letter-spacing: 1px;
+  background-color: transparent;
+
   text-transform: uppercase;
   transition: transform 80ms ease-in;
-
-  background-color: transparent;
-  border-color: #ffffff;
 
   :active {
     transform: scale(0.95);

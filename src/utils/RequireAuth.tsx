@@ -1,5 +1,4 @@
 import { Outlet, Navigate } from "react-router-dom";
-
 import Cookies from "universal-cookie";
 
 interface Props {
