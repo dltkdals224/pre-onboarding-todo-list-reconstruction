@@ -9,7 +9,7 @@ import ReportError from "../utils/ReportError";
 
 import { SIGNIN_INPUT_VALIDATION } from "../constants/Authentication";
 
-const SignIn = ({ isDefaultForm }: { isDefaultForm: any }) => {
+const SignIn = ({ isDefaultForm }: { isDefaultForm: boolean }) => {
   const cookies = new Cookies();
   const navigate = useNavigate();
 
@@ -19,8 +19,8 @@ const SignIn = ({ isDefaultForm }: { isDefaultForm: any }) => {
     formState: { isSubmitting, isDirty, errors },
   } = useForm();
 
-  const setAccessToken = (responseData: any) => {
-    cookies.set("ACCESS_TOKEN", responseData.data.access_token, {
+  const setAccessToken = (access_token: string) => {
+    cookies.set("ACCESS_TOKEN", access_token, {
       expires: new Date(Date.now() + 1000 * 60 * 59),
       secure: true,
     });
@@ -34,8 +34,8 @@ const SignIn = ({ isDefaultForm }: { isDefaultForm: any }) => {
     await new Promise((e) => setTimeout(e, 300));
 
     try {
-      const res = await signInApi(data.email, data.password);
-      setAccessToken(res);
+      const response = await signInApi(data.email, data.password);
+      setAccessToken(response.data.access_token);
       navigateToHome();
     } catch (error: unknown) {
       ReportError(error);
@@ -84,7 +84,7 @@ const SignIn = ({ isDefaultForm }: { isDefaultForm: any }) => {
 
 export default SignIn;
 
-const Section = styled.section<{ isDefaultForm: any }>`
+const Section = styled.section<{ isDefaultForm: Boolean }>`
   position: absolute;
   top: 0;
   left: 0;

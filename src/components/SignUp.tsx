@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { useForm, ValidateResult } from "react-hook-form";
+import { useForm, FieldValues, ValidateResult } from "react-hook-form";
 
 import { signUpApi } from "../apis/auth";
 
@@ -7,7 +7,7 @@ import ReportError from "../utils/ReportError";
 
 import { SIGNUP_INPUT_VALIDATION } from "../constants/Authentication";
 
-const SignUp = ({ isDefaultForm }: { isDefaultForm: any }) => {
+const SignUp = ({ isDefaultForm }: { isDefaultForm: boolean }) => {
   const {
     register,
     handleSubmit,
@@ -15,7 +15,7 @@ const SignUp = ({ isDefaultForm }: { isDefaultForm: any }) => {
     formState: { isSubmitting, isDirty, errors },
   } = useForm();
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: FieldValues) => {
     await new Promise((e) => setTimeout(e, 300));
 
     try {
@@ -91,7 +91,7 @@ const SignUp = ({ isDefaultForm }: { isDefaultForm: any }) => {
 
 export default SignUp;
 
-const Section = styled.section<{ isDefaultForm: any }>`
+const Section = styled.section<{ isDefaultForm: Boolean }>`
   position: absolute;
   top: 0;
   left: 0;
