@@ -4,7 +4,7 @@ import Cookies from "universal-cookie";
 const cookies = new Cookies();
 const ACCESS_TOKEN = cookies.get("ACCESS_TOKEN");
 
-const BACKEND_BASE_URL = process.env.BACKEND_BASE_URL;
+const BACKEND_BASE_URL = process.env.REACT_APP_API_URL;
 
 const client = axios.create({
   baseURL: BACKEND_BASE_URL,
