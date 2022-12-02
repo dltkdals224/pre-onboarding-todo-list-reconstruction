@@ -1,24 +1,36 @@
 import styled, { css } from "styled-components";
-import { useForm } from "react-hook-form";
+import { useForm, ValidateResult } from "react-hook-form";
+
+import { signUpApi } from "../apis/auth";
+
+import ReportError from "../utils/ReportError";
+
+import { SIGNUP_INPUT_VALIDATION } from "../constants/Authentication";
 
 const SignUp = ({ isDefaultForm }: { isDefaultForm: any }) => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { isSubmitting, isDirty, errors },
   } = useForm();
 
-  const onValid = async (data: any) => {
-    await new Promise((r) => setTimeout(r, 500));
-    console.log(data);
-    alert(JSON.stringify(data));
+  const onSubmit = async (data: any) => {
+    await new Promise((e) => setTimeout(e, 300));
 
-    // passwordReconfirm 확인 로직
+    try {
+      const res = await signUpApi(data.email, data.password);
+      if (res.statusText === "Created") {
+        alert("회원가입을 축하드립니다.");
+      }
+    } catch (error: unknown) {
+      ReportError(error);
+    }
   };
 
   return (
     <Section isDefaultForm={isDefaultForm}>
-      <SignUpForm onSubmit={handleSubmit(onValid)}>
+      <SignUpForm onSubmit={handleSubmit(onSubmit)}>
         <h1>Create Account</h1>
         <SocialContainer>
           <a>
@@ -34,49 +46,42 @@ const SignUp = ({ isDefaultForm }: { isDefaultForm: any }) => {
 
         <span>or use your email for registration</span>
         <SignUpInput
+          autoComplete="username"
           placeholder="Email"
-          aria-invalid={!isDirty ? undefined : errors.email ? "true" : "false"}
-          {...register("email", {
-            required: true,
-            pattern: {
-              value: /\S+@\S+\.\S+/,
-              message: "이메일 형식에 맞지 않습니다.",
-            },
-          })}
+          aria-invalid={isDirty || errors.email ? "true" : "false"}
+          {...register("email", SIGNUP_INPUT_VALIDATION.email)}
         />
-        {errors.email && <>{errors.email.message}</>}
+        <ErrorMessage>{`${errors.email?.message ?? ""}`}</ErrorMessage>
 
         <SignUpInput
           type="password"
+          autoComplete="new-password"
           placeholder="Password"
-          aria-invalid={
-            !isDirty ? undefined : errors.passwrod ? "true" : "false"
-          }
-          {...register("password", {
-            required: true,
-            minLength: {
-              value: 8,
-              message: "8자리 이상의 비밀번호를 입력해주세요.",
-            },
-          })}
+          aria-invalid={isDirty || errors.passwrod ? "true" : "false"}
+          {...register("password", SIGNUP_INPUT_VALIDATION.password)}
         />
-        {errors.password && <>{errors.password.message}</>}
+        <ErrorMessage>{`${errors.password?.message ?? ""}`}</ErrorMessage>
 
         <SignUpInput
           type="password"
+          autoComplete="new-password"
           placeholder="Password Reconfirm"
-          aria-invalid={
-            !isDirty ? undefined : errors.passwordReconfirm ? "true" : "false"
-          }
+          aria-invalid={isDirty || errors.passwordReconfirm ? "true" : "false"}
           {...register("passwordReconfirm", {
-            required: true,
-            minLength: {
-              value: 8,
-              message: "8자리 이상의 비밀번호를 입력해주세요.",
+            ...SIGNUP_INPUT_VALIDATION.passwordReconfirm,
+            validate: {
+              matchPassword: (passwordReconfirm): ValidateResult => {
+                return (
+                  passwordReconfirm === watch("password") ||
+                  "비밀번호가 일치하지 않습니다."
+                );
+              },
             },
           })}
         />
-        {errors.passwordReconfirm && <>{errors.passwordReconfirm.message}</>}
+        <ErrorMessage>{`${
+          errors.passwordReconfirm?.message ?? ""
+        }`}</ErrorMessage>
 
         <SignUpButton disabled={isSubmitting}>Sign Up</SignUpButton>
       </SignUpForm>
@@ -154,8 +159,8 @@ const SignUpButton = styled.button`
   margin-top: 24px;
 
   border-radius: 20px;
-  border: 1px solid #ff4b2b;
-  background-color: #ff4b2b;
+  border: 1px solid ${(props) => props.theme.R_1};
+  background-color: ${(props) => props.theme.R_1};
   color: #ffffff;
   font-size: 12px;
   font-weight: bold;
@@ -171,4 +176,16 @@ const SignUpButton = styled.button`
   :focus {
     outline: none;
   }
+`;
+
+const ErrorMessage = styled.span`
+  display: flex;
+
+  width: 100%;
+
+  margin-top: -5px;
+
+  color: ${(props) => props.theme.R_1};
+  font-size: 10px;
+  font-weight: 600;
 `;

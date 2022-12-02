@@ -1,21 +1,50 @@
 import styled, { css } from "styled-components";
-import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { useForm, FieldValues } from "react-hook-form";
+import Cookies from "universal-cookie";
+
+import { signInApi } from "../apis/auth";
+
+import ReportError from "../utils/ReportError";
+
+import { SIGNIN_INPUT_VALIDATION } from "../constants/Authentication";
 
 const SignIn = ({ isDefaultForm }: { isDefaultForm: any }) => {
+  const cookies = new Cookies();
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     formState: { isSubmitting, isDirty, errors },
   } = useForm();
 
+  const setAccessToken = (responseData: any) => {
+    cookies.set("ACCESS_TOKEN", responseData.data.access_token, {
+      expires: new Date(Date.now() + 1000 * 60 * 59),
+      secure: true,
+    });
+  };
+
+  const navigateToHome = () => {
+    navigate("/todo");
+  };
+
+  const onSubmit = async (data: FieldValues) => {
+    await new Promise((e) => setTimeout(e, 300));
+
+    try {
+      const res = await signInApi(data.email, data.password);
+      setAccessToken(res);
+      navigateToHome();
+    } catch (error: unknown) {
+      ReportError(error);
+    }
+  };
+
   return (
     <Section className="sign-in-container" isDefaultForm={isDefaultForm}>
-      <SignInForm
-        onSubmit={handleSubmit(async (data) => {
-          await new Promise((r) => setTimeout(r, 500));
-          alert(JSON.stringify(data));
-        })}
-      >
+      <SignInForm onSubmit={handleSubmit(onSubmit)}>
         <h1>Sign in</h1>
         <SocialContainer className="social-container">
           <a>
@@ -31,29 +60,21 @@ const SignIn = ({ isDefaultForm }: { isDefaultForm: any }) => {
 
         <span>or use your account</span>
         <SignInInput
+          autoComplete="username"
           placeholder="Email"
-          aria-invalid={!isDirty ? undefined : errors.email ? "true" : "false"}
-          {...register("email", {
-            required: true,
-            pattern: {
-              value: /\S+@\S+\.\S+/,
-              message: "이메일 형식에 맞지 않습니다.",
-            },
-          })}
+          aria-invalid={isDirty || errors.email ? "true" : "false"}
+          {...register("email", SIGNIN_INPUT_VALIDATION.email)}
         />
-        {errors.email && <>{errors.email.message}</>}
+        <ErrorMessage>{`${errors.email?.message ?? ""}`}</ErrorMessage>
 
         <SignInInput
           type="password"
+          autoComplete="new-password"
           placeholder="Password"
-          aria-invalid={
-            !isDirty ? undefined : errors.passwrod ? "true" : "false"
-          }
-          {...register("password", {
-            required: true,
-          })}
+          aria-invalid={isDirty || errors.passwrod ? "true" : "false"}
+          {...register("password", SIGNIN_INPUT_VALIDATION.password)}
         />
-        {errors.password && <>{errors.password.message}</>}
+        <ErrorMessage>{`${errors.password?.message ?? ""}`}</ErrorMessage>
 
         <SignInButton disabled={isSubmitting}>Sign In</SignInButton>
       </SignInForm>
@@ -144,4 +165,16 @@ const SignInButton = styled.button`
   :focus {
     outline: none;
   }
+`;
+
+const ErrorMessage = styled.span`
+  display: flex;
+
+  width: 100%;
+
+  margin-top: -5px;
+
+  color: ${(props) => props.theme.R_1};
+  font-size: 10px;
+  font-weight: 600;
 `;
