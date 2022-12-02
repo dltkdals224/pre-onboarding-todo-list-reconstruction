@@ -7,10 +7,9 @@ const ReportError = (error: unknown) => {
   if (error instanceof AxiosError) {
     reportErrorMessage = error.message;
     alertErrorMessage = error.response?.data.message;
-
-    alert(alertErrorMessage);
   }
 
+  alert(alertErrorMessage);
   reportError({ reportErrorMessage });
 };
 
