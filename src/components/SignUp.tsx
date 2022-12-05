@@ -31,20 +31,8 @@ const SignUp = ({ isDefaultForm }: { isDefaultForm: boolean }) => {
   return (
     <Section isDefaultForm={isDefaultForm}>
       <SignUpForm onSubmit={handleSubmit(onSubmit)}>
-        <h1>Create Account</h1>
-        <SocialContainer>
-          <a>
-            <i className="fab fa-facebook-f"></i>
-          </a>
-          <a>
-            <i className="fab fa-google-plus-g"></i>
-          </a>
-          <a>
-            <i className="fab fa-linkedin-in"></i>
-          </a>
-        </SocialContainer>
+        <SignUpTitle>Create Account</SignUpTitle>
 
-        <span>or use your email for registration</span>
         <SignUpInput
           autoComplete="username"
           placeholder="Email"
@@ -126,22 +114,8 @@ const SignUpForm = styled.form`
   text-align: center;
 `;
 
-const SocialContainer = styled.div`
-  margin: 20px 0;
-
-  a {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 40px;
-    height: 40px;
-
-    margin: 0 5px;
-
-    border: 1px solid #dddddd;
-    border-radius: 50%;
-  }
+const SignUpTitle = styled.h1`
+  margin-bottom: 24px;
 `;
 
 const SignUpInput = styled.input`

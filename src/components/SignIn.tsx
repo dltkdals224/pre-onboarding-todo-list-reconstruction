@@ -43,22 +43,10 @@ const SignIn = ({ isDefaultForm }: { isDefaultForm: boolean }) => {
   };
 
   return (
-    <Section className="sign-in-container" isDefaultForm={isDefaultForm}>
+    <Section isDefaultForm={isDefaultForm}>
       <SignInForm onSubmit={handleSubmit(onSubmit)}>
-        <h1>Sign in</h1>
-        <SocialContainer className="social-container">
-          <a>
-            <i className="fab fa-facebook-f"></i>
-          </a>
-          <a>
-            <i className="fab fa-google-plus-g"></i>
-          </a>
-          <a>
-            <i className="fab fa-linkedin-in"></i>
-          </a>
-        </SocialContainer>
+        <SignInTitle>Sign in</SignInTitle>
 
-        <span>or use your account</span>
         <SignInInput
           autoComplete="username"
           placeholder="Email"
@@ -114,22 +102,8 @@ const SignInForm = styled.form`
   text-align: center;
 `;
 
-const SocialContainer = styled.div`
-  margin: 20px 0;
-
-  a {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 40px;
-    height: 40px;
-
-    margin: 0 5px;
-
-    border: 1px solid #dddddd;
-    border-radius: 50%;
-  }
+const SignInTitle = styled.h1`
+  margin-bottom: 24px;
 `;
 
 const SignInInput = styled.input`
