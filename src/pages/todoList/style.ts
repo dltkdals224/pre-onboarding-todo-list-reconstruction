@@ -18,3 +18,9 @@ export const Article = styled.article`
   -webkit-animation: fadein 1s; /* Safari and Chrome */
   -o-animation: fadein 1s; /* Opera */
 `;
+
+export const TodoList = styled.div`
+  max-height: 924px;
+
+  overflow-y: auto;
+`;
