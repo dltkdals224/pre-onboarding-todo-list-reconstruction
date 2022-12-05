@@ -17,6 +17,7 @@ const Overlay = ({
       setSignInForm();
     }
   };
+
   return (
     <Section isDefaultForm={isDefaultForm}>
       <Wrapper>

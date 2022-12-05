@@ -1,8 +1,8 @@
 import { useFormShown } from "../../hooks/useFormShown";
 
-import SignIn from "../../components/SignIn";
-import SignUp from "../../components/SignUp";
-import Overlay from "../../components/Overlay";
+import SignIn from "../../components/Auth/SignIn";
+import SignUp from "../../components/Auth/SignUp";
+import Overlay from "../../components/Auth/Overlay";
 
 import * as Style from "./style";
 

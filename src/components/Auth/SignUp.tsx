@@ -1,11 +1,11 @@
 import styled, { css } from "styled-components";
 import { useForm, FieldValues, ValidateResult } from "react-hook-form";
 
-import { signUpApi } from "../apis/auth";
+import { signUpApi } from "../../apis/auth";
 
-import ReportError from "../utils/ReportError";
+import ReportError from "../../utils/ReportError";
 
-import { SIGNUP_INPUT_VALIDATION } from "../constants/Authentication";
+import { SIGNUP_INPUT_VALIDATION } from "../../constants/Authentication";
 
 const SignUp = ({ isDefaultForm }: { isDefaultForm: boolean }) => {
   const {
