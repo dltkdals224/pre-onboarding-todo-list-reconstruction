@@ -9,8 +9,6 @@ import * as Style from "./style";
 const Auth = () => {
   const [isDefaultForm, setSignInForm, setSignUpForm] = useFormShown(false);
 
-  // 3. 구글, 네이버 로그인 연동
-
   // 4. 투두리스트 기본 틀 구현 (설계에 힘 써야 함)
   // 5. 동작 확인
 
@@ -18,15 +16,13 @@ const Auth = () => {
 
   return (
     <Style.Article>
-      <Style.InnerArticle className="container">
-        <SignIn isDefaultForm={isDefaultForm} />
-        <SignUp isDefaultForm={isDefaultForm} />
-        <Overlay
-          isDefaultForm={isDefaultForm}
-          setSignInForm={setSignInForm}
-          setSignUpForm={setSignUpForm}
-        />
-      </Style.InnerArticle>
+      <SignIn isDefaultForm={isDefaultForm} />
+      <SignUp isDefaultForm={isDefaultForm} />
+      <Overlay
+        isDefaultForm={isDefaultForm}
+        setSignInForm={setSignInForm}
+        setSignUpForm={setSignUpForm}
+      />
     </Style.Article>
   );
 };

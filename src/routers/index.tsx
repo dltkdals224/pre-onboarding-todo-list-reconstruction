@@ -5,12 +5,12 @@ import {
   Route,
 } from "react-router-dom";
 
-import Auth from "../pages/auth";
-import TodoList from "../pages/todoList";
-
 import RequireAuth from "../utils/RequireAuth";
 
 import { ROUTE_URL } from "../constants/Route";
+
+import Auth from "../pages/auth";
+import TodoList from "../pages/todoList";
 
 const Routers = () => {
   return (

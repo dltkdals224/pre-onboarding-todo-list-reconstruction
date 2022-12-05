@@ -5,7 +5,7 @@ export const Article = styled.article`
 
   min-width: 768px;
   max-width: 100%;
-  min-height: 480px;
+  min-height: 1024px;
 
   background-color: #fff;
   border-radius: 10px;

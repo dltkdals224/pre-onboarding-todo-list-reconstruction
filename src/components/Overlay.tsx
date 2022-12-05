@@ -18,8 +18,8 @@ const Overlay = ({
     }
   };
   return (
-    <Section className="overlay-container" isDefaultForm={isDefaultForm}>
-      <Wrapper className="overlay">
+    <Section isDefaultForm={isDefaultForm}>
+      <Wrapper>
         <OverlayPanel>
           <h1>
             {isDefaultForm

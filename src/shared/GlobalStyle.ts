@@ -46,6 +46,15 @@ a {
 	margin: 15px 0;
 }
 
+.page {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    width: 100vw;
+    height: 100vh;
+}
+
 @keyframes show {
 	0%, 49.99% {
 		opacity: 0;
