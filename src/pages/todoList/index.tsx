@@ -1,5 +1,6 @@
 import { useQuery } from "react-query";
 
+import Logout from "../../components/TodoList/Logout";
 import TodoInput from "../../components/TodoList/TodoInput";
 import TodoItem from "../../components/TodoList/TodoItem";
 
@@ -22,6 +23,7 @@ const TodoList = () => {
 
   return (
     <Style.Article>
+      <Logout />
       <TodoInput />
 
       <Style.TodoList>
