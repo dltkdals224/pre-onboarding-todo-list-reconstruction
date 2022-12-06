@@ -8,7 +8,7 @@ export default {
     align-items: center;
   `,
 
-  BLACK: "#00000",
-  WHITE: "#FFFFF",
+  BLACK: "#000000",
+  WHITE: "#FFFFFF",
   R_1: "#FF4B2B",
 };
