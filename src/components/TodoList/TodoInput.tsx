@@ -6,40 +6,45 @@ import { createTodoApi } from "../../apis/todo";
 
 const TodoInput = () => {
   // custom hook 처리 가능
-  const [test, setTest] = useState();
+  const [creationInputValue, setCreationInputValue] = useState("");
 
   const useCreateTodo = () => {
     const queryClient = useQueryClient();
 
-    return useMutation(async () => await createTodoApi(test), {
+    return useMutation(async () => await createTodoApi(creationInputValue), {
       onSuccess: () => {
         queryClient.refetchQueries(["todoList"]);
       },
     });
   };
-  const saveData = useCreateTodo();
-  const confirmSaveCartData = () => {
-    saveData.mutate();
-  };
-
-  const handleChange = (e: any) => {
-    setTest(e.target.value);
+  const creationTrigger = useCreateTodo();
+  const createTodo = () => {
+    creationTrigger.mutate();
+    setCreationInputValue("");
   };
   //
 
-  // 추가 구현
+  const handleCreationInputChange = (e: any) => {
+    setCreationInputValue(e.target.value);
+  };
 
-  // enter에 대한 처리
-  // input value 비우기
+  const handleCreationInputKeyDown = (e: any) => {
+    if (e.key === "Enter" && e.nativeEvent.isComposing === false) {
+      createTodo();
+    }
+  };
 
   return (
     <Wrapper>
       <InputWrapper>
         <CreationInput
           placeholder="할 일을 입력해주세요."
-          onChange={handleChange}
+          autoFocus
+          onChange={handleCreationInputChange}
+          onKeyDown={handleCreationInputKeyDown}
+          value={creationInputValue}
         />
-        <CreationButton onClick={confirmSaveCartData}>+</CreationButton>
+        <CreationButton onClick={createTodo}>+</CreationButton>
       </InputWrapper>
     </Wrapper>
   );
@@ -53,9 +58,7 @@ const Wrapper = styled.div`
   width: 100%;
   height: 80px;
 
-  margin-top: 20px;
-
-  background-color: red;
+  background-color: #f5f5dc;
 `;
 
 const InputWrapper = styled.div`
@@ -66,15 +69,25 @@ const InputWrapper = styled.div`
   width: 704px;
   height: 60px;
 
-  background-color: blue;
+  border-radius: 10px;
+
+  background-color: white;
 `;
 
 const CreationInput = styled.input`
   width: 640px;
   height: 32px;
+
+  border: 0px;
 `;
 
 const CreationButton = styled.button`
   width: 32px;
   height: 32px;
+
+  border: 0.1px solid gray;
+  border-radius: 2px;
+  background-color: #efefef;
+
+  cursor: pointer;
 `;

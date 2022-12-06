@@ -1,23 +1,26 @@
 import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { updateTodoApi, deleteTodoApi } from "../../apis/todo";
 
+import useFocus from "../../hooks/useFocus";
+
 const TodoItem = ({ data }: { data: any }) => {
   const [isEditMode, setIsEditMode] = useState(false);
+  const { ref: inputFocusRef, setIsFocused } = useFocus(false);
 
-  //
-  const [inputValue, setInputValue] = useState(data.todo);
+  // handleChange,
+  const [editInputValue, setEditInputValue] = useState(data.todo);
   const handleChange = (e: any) => {
-    setInputValue(e.target.value);
+    setEditInputValue(e.target.value);
   };
 
   const useEditTodo = () => {
     const queryClient = useQueryClient();
 
     return useMutation(
-      async (type) => await updateTodoApi(data.id, inputValue, type),
+      async (type) => await updateTodoApi(data.id, editInputValue, type),
       {
         onSuccess: () => {
           queryClient.refetchQueries(["todoList"]);
@@ -25,9 +28,10 @@ const TodoItem = ({ data }: { data: any }) => {
       }
     );
   };
-  const saveData1 = useEditTodo();
-  const confirmSaveCartData1 = (type: any) => {
-    saveData1.mutate(type);
+
+  const editionTrigger = useEditTodo();
+  const editTodo = (type: any) => {
+    editionTrigger.mutate(type);
   };
 
   //
@@ -41,19 +45,27 @@ const TodoItem = ({ data }: { data: any }) => {
       },
     });
   };
-  const saveData = useDeleteTodo();
-  const confirmSaveCartData = () => {
-    saveData.mutate();
+  const deletionTrigger = useDeleteTodo();
+  const deleteTodo = () => {
+    deletionTrigger.mutate();
   };
 
   //
   const operateEdit = () => {
     setIsEditMode(true);
+    setIsFocused(true);
   };
 
   const completeEdit = () => {
-    confirmSaveCartData1(data.isCompleted);
+    setIsFocused(false);
+    editTodo(data.isCompleted);
     setIsEditMode(false);
+  };
+
+  const handleEditionInputKeyDown = (e: any) => {
+    if (e.key === "Enter" && e.nativeEvent.isComposing === false) {
+      completeEdit();
+    }
   };
 
   return (
@@ -63,12 +75,20 @@ const TodoItem = ({ data }: { data: any }) => {
           type="checkbox"
           checked={data.isCompleted}
           onChange={() => {
-            confirmSaveCartData1(!data.isCompleted);
+            editTodo(!data.isCompleted);
           }}
         />
 
-        {isEditMode && <TodoEditInput onChange={handleChange} />}
-        {!isEditMode && <TodoText>{data.todo}</TodoText>}
+        {isEditMode ? (
+          <TodoEditInput
+            ref={inputFocusRef}
+            onChange={handleChange}
+            onKeyDown={handleEditionInputKeyDown}
+            defaultValue={data.todo}
+          />
+        ) : (
+          <TodoText isCompleted={data.isCompleted}>{data.todo}</TodoText>
+        )}
       </InnerWrapper>
 
       <ButtonWrapper>
@@ -76,7 +96,7 @@ const TodoItem = ({ data }: { data: any }) => {
           {isEditMode ? `완료` : `수정`}
         </EditButton>
 
-        <DeleteButton onClick={confirmSaveCartData}>삭제</DeleteButton>
+        <DeleteButton onClick={deleteTodo}>삭제</DeleteButton>
       </ButtonWrapper>
     </Wrapper>
   );
@@ -92,7 +112,7 @@ const Wrapper = styled.div`
   width: 100%;
   height: 80px;
 
-  background-color: green;
+  background-color: #f5f5dc;
 `;
 
 const InnerWrapper = styled.div`
@@ -106,7 +126,8 @@ const InnerWrapper = styled.div`
   gap: 10px;
   padding-left: 10px;
 
-  background-color: yellow;
+  background-color: white;
+  border-radius: 10px;
 `;
 
 const CheckBox = styled.input``;
@@ -114,9 +135,25 @@ const CheckBox = styled.input``;
 const TodoEditInput = styled.input`
   width: 90%;
   height: 30px;
+
+  margin-left: -3px;
+
+  border: 0;
+
+  font-weight: 400;
+  color: gray;
 `;
 
-const TodoText = styled.span``;
+const TodoText = styled.span<{ isCompleted: Boolean }>`
+  font-size: 14px;
+  font-weight: 600;
+
+  ${(props) =>
+    props.isCompleted &&
+    css`
+      text-decoration: line-through;
+    `}
+`;
 
 const ButtonWrapper = styled.div`
   ${(props) => props.theme.FLEX_CENTER}
@@ -127,15 +164,26 @@ const ButtonWrapper = styled.div`
 
   gap: 5px;
 
-  background-color: skyblue;
+  border-radius: 5px;
+  background-color: ${(props) => props.theme.WHITE};
 `;
 
 const EditButton = styled.button`
   width: 48px;
   height: 24px;
+
+  border: 0.1px solid gray;
+  border-radius: 3px;
+
+  cursor: pointer;
 `;
 
 const DeleteButton = styled.button`
   width: 48px;
   height: 24px;
+
+  border: 0.1px solid gray;
+  border-radius: 3px;
+
+  cursor: pointer;
 `;
