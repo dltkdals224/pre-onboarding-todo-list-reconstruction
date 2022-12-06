@@ -1,8 +1,8 @@
 import axios from "axios";
-import Cookies from "universal-cookie";
 
-const cookies = new Cookies();
-const ACCESS_TOKEN = cookies.get("ACCESS_TOKEN");
+import { getAccessToken } from "../utils/HandleAccessToken";
+
+const ACCESS_TOKEN = getAccessToken();
 
 const BACKEND_BASE_URL = process.env.REACT_APP_API_URL;
 

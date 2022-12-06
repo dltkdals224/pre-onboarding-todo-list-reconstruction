@@ -1,11 +1,11 @@
 import styled, { css } from "styled-components";
 
 import { useForm, FieldValues } from "react-hook-form";
-import Cookies from "universal-cookie";
 
 import { signInApi } from "../../apis/auth";
 
 import ReportError from "../../utils/ReportError";
+import { setAccessToken } from "../../utils/HandleAccessToken";
 
 import { SIGNIN_INPUT_VALIDATION } from "../../constants/Authentication";
 
@@ -16,22 +16,12 @@ const SignIn = ({ isDefaultForm }: { isDefaultForm: boolean }) => {
     formState: { isSubmitting, isDirty, errors },
   } = useForm();
 
-  const setAccessToken = (access_token: string) => {
-    const cookies = new Cookies();
-
-    cookies.set("ACCESS_TOKEN", access_token, {
-      expires: new Date(Date.now() + 1000 * 60 * 59),
-    });
-  };
-
   const onSubmit = async (data: FieldValues) => {
     await new Promise((e) => setTimeout(e, 300));
 
     try {
       const response = await signInApi(data.email, data.password);
       setAccessToken(response.data.access_token);
-
-      window.location.reload();
     } catch (error: unknown) {
       ReportError(error);
     }

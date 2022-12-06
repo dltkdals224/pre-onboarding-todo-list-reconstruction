@@ -1,12 +1,10 @@
 import styled from "styled-components";
-import Cookies from "universal-cookie";
+
+import { removeAccessToken } from "../../utils/HandleAccessToken";
 
 const Logout = () => {
   const logout = () => {
-    const cookies = new Cookies();
-    cookies.remove("ACCESS_TOKEN");
-
-    window.location.reload();
+    removeAccessToken();
   };
 
   return (
