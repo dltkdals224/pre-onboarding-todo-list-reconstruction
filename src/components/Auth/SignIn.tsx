@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { useNavigate } from "react-router-dom";
+
 import { useForm, FieldValues } from "react-hook-form";
 import Cookies from "universal-cookie";
 
@@ -10,9 +10,6 @@ import ReportError from "../../utils/ReportError";
 import { SIGNIN_INPUT_VALIDATION } from "../../constants/Authentication";
 
 const SignIn = ({ isDefaultForm }: { isDefaultForm: boolean }) => {
-  const cookies = new Cookies();
-  const navigate = useNavigate();
-
   const {
     register,
     handleSubmit,
@@ -20,14 +17,11 @@ const SignIn = ({ isDefaultForm }: { isDefaultForm: boolean }) => {
   } = useForm();
 
   const setAccessToken = (access_token: string) => {
+    const cookies = new Cookies();
+
     cookies.set("ACCESS_TOKEN", access_token, {
       expires: new Date(Date.now() + 1000 * 60 * 59),
-      secure: true,
     });
-  };
-
-  const navigateToHome = () => {
-    navigate("/todo");
   };
 
   const onSubmit = async (data: FieldValues) => {
@@ -36,7 +30,8 @@ const SignIn = ({ isDefaultForm }: { isDefaultForm: boolean }) => {
     try {
       const response = await signInApi(data.email, data.password);
       setAccessToken(response.data.access_token);
-      navigateToHome();
+
+      window.location.reload();
     } catch (error: unknown) {
       ReportError(error);
     }
