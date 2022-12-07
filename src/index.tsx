@@ -4,8 +4,8 @@ import { ThemeProvider } from "styled-components";
 
 import App from "./App";
 
-import GlobalStyle from "./shared/GlobalStyle";
-import theme from "./shared/Theme";
+import GlobalStyle from "./styles/GlobalStyle";
+import theme from "./styles/Theme";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

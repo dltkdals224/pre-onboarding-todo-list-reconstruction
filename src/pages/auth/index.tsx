@@ -9,10 +9,11 @@ import * as Style from "./style";
 const Auth = () => {
   const [isDefaultForm, setSignInForm, setSignUpForm] = useFormShown(false);
 
-  // 4. 투두리스트 기본 틀 구현 (설계에 힘 써야 함)
-  // 5. 동작 확인
+  // 3. 쉬어가기 - 디자인 수정 (까지 마치기 맨)
+  // 4. 정말 디자인까지 마무리
 
-  // 6. 웹 최적화
+  // 5. 웹 최적화
+  // 6. 배포 , readme.md
 
   return (
     <Style.Article>
