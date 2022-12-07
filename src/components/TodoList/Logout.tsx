@@ -3,13 +3,9 @@ import styled from "styled-components";
 import { removeAccessToken } from "../../utils/HandleAccessToken";
 
 const Logout = () => {
-  const logout = () => {
-    removeAccessToken();
-  };
-
   return (
     <Wrapper>
-      <LogoutButton onClick={logout}>x</LogoutButton>
+      <LogoutButton onClick={removeAccessToken}>x</LogoutButton>
     </Wrapper>
   );
 };
