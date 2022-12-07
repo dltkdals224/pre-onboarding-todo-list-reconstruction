@@ -1,5 +1,7 @@
 import styled, { css } from "styled-components";
 
+import { OverlayHead, OverlayParagraph } from "../../constants/Paragraph";
+
 const Overlay = ({
   isDefaultForm,
   setSignInForm,
@@ -22,12 +24,11 @@ const Overlay = ({
     <Section isDefaultForm={isDefaultForm}>
       <Wrapper>
         <OverlayPanel>
-          <h1>
-            {isDefaultForm
-              ? `Have you already signed up?`
-              : `Hello, Is this your first visit?`}
-          </h1>
-          <p>this todolist made by Sangmin</p>
+          <h1>{isDefaultForm ? OverlayHead.signUp : OverlayHead.signIn}</h1>
+          <p>
+            {isDefaultForm ? OverlayParagraph.signUp : OverlayParagraph.signIn}
+          </p>
+          <p>{OverlayParagraph.maker}</p>
           <OverlayButton onClick={handleClick}>
             {isDefaultForm ? `SIGN IN` : `SIGN UP`}
           </OverlayButton>
@@ -66,13 +67,13 @@ const Wrapper = styled.div`
   height: 100%;
   width: 200%;
 
-  background: #ff416c;
-  background: -webkit-linear-gradient(to right, #ff4b2b, #ff416c);
-  background: linear-gradient(to right, #ff4b2b, #ff416c);
+  background: ${(props) => props.theme.MAIN_B_1};
+  background: -webkit-linear-gradient(to right, #768ba2, #5c7896);
+  background: linear-gradient(to right, #768ba2, #5c7896);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 0 0;
-  color: #ffffff;
+  color: ${(props) => props.theme.WHITE};
 
   transform: translateX(0);
   transition: transform 0.6s ease-in-out;
@@ -104,11 +105,11 @@ const OverlayPanel = styled.div`
 const OverlayButton = styled.button`
   padding: 12px 45px;
 
-  border: 1px solid #ff4b2b;
+  border: 1px solid ${(props) => props.theme.MAIN_B_2};
   border-radius: 20px;
-  border-color: #ffffff;
-  background-color: #ff4b2b;
-  color: #ffffff;
+  border-color: ${(props) => props.theme.WHITE};
+  background-color: ${(props) => props.theme.MAIN_B_2};
+  color: ${(props) => props.theme.WHITE};
   font-size: 12px;
   font-weight: bold;
   letter-spacing: 1px;
@@ -116,6 +117,8 @@ const OverlayButton = styled.button`
 
   text-transform: uppercase;
   transition: transform 80ms ease-in;
+
+  cursor: pointer;
 
   :active {
     transform: scale(0.95);
