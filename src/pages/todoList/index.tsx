@@ -1,24 +1,19 @@
-import { useQuery } from "react-query";
-
 import Logout from "../../components/TodoList/Logout";
 import TodoInput from "../../components/TodoList/TodoInput";
 import TodoItem from "../../components/TodoList/TodoItem";
 
-import { getTodoApi } from "../../apis/todo";
+import useGetTodoListQuery from "../../hooks/shared/useGetTodoListQuery";
 
 import * as Style from "./style";
 
+interface TodoDataObject {
+  id: number;
+  todo: string;
+  isCompleted: boolean;
+  userId: number;
+}
+
 const TodoList = () => {
-  // custom hook 처리 가능
-  const useGetTodoListQuery = () => {
-    return useQuery({
-      queryKey: ["todoList"],
-      queryFn: () => {
-        return getTodoApi();
-      },
-    });
-  };
-  //
   const { data: todoList, isLoading, isError } = useGetTodoListQuery();
 
   return (
@@ -27,8 +22,8 @@ const TodoList = () => {
       <TodoInput />
 
       <Style.TodoList>
-        {todoList?.data.map((todo: any) => {
-          return <TodoItem key={todo.id} data={todo} />;
+        {todoList?.data.map((todoData: TodoDataObject) => {
+          return <TodoItem key={todoData.id} data={todoData} />;
         })}
       </Style.TodoList>
     </Style.Article>
