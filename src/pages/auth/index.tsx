@@ -9,9 +9,6 @@ import * as Style from "./style";
 const Auth = () => {
   const [isDefaultForm, setSignInForm, setSignUpForm] = useFormShown(false);
 
-  // 3. 쉬어가기 - 디자인 수정 (까지 마치기 맨)
-  // 4. 정말 디자인까지 마무리
-
   // 5. 웹 최적화
   // 6. 배포 , readme.md
 

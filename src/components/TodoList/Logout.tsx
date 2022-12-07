@@ -18,17 +18,15 @@ const Wrapper = styled.div`
   align-items: center;
 
   width: 100%;
-
-  background-color: #f5f5dc;
 `;
 
 const LogoutButton = styled.button`
   width: 24px;
   height: 24px;
 
-  border: 0.1px solid gray;
+  border: 0.1px solid ${(props) => props.theme.GRAY};
   border-radius: 100%;
-  background-color: #efefef;
+  background-color: ${(props) => props.theme.GRAY_2};
 
   cursor: pointer;
 `;

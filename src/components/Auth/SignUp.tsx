@@ -110,7 +110,7 @@ const SignUpForm = styled.form`
 
   padding: 0 50px;
 
-  background-color: #ffffff;
+  background-color: ${(props) => props.theme.WHITE};
   text-align: center;
 `;
 
@@ -124,7 +124,7 @@ const SignUpInput = styled.input`
   padding: 12px 15px;
   margin: 8px 0;
 
-  background-color: #eee;
+  background-color: ${(props) => props.theme.WHITE_2};
   border: none;
 `;
 
@@ -133,15 +133,17 @@ const SignUpButton = styled.button`
   margin-top: 24px;
 
   border-radius: 20px;
-  border: 1px solid ${(props) => props.theme.R_1};
-  background-color: ${(props) => props.theme.R_1};
-  color: #ffffff;
+  border: 1px solid ${(props) => props.theme.MAIN_B_2};
+  background-color: ${(props) => props.theme.MAIN_B_2};
+  color: ${(props) => props.theme.WHITE};
   font-size: 12px;
   font-weight: bold;
   letter-spacing: 1px;
 
   text-transform: uppercase;
   transition: transform 80ms ease-in;
+
+  cursor: pointer;
 
   :active {
     transform: scale(0.95);

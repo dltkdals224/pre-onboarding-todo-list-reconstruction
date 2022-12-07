@@ -9,6 +9,13 @@ export default {
   `,
 
   BLACK: "#000000",
+  GRAY: "GRAY",
+  GRAY_2: "#EFEFEF",
   WHITE: "#FFFFFF",
+  WHITE_2: "#EEE",
+
+  MAIN_B_1: "#5C7896",
+  MAIN_B_2: "#768BA2",
+
   R_1: "#FF4B2B",
 };

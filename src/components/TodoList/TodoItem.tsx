@@ -88,7 +88,7 @@ const Wrapper = styled.div`
   width: 100%;
   height: 80px;
 
-  background-color: #f5f5dc;
+  background-color: ${(props) => props.theme.MAIN_B_1};
 `;
 
 const InnerWrapper = styled.div`
@@ -102,7 +102,7 @@ const InnerWrapper = styled.div`
   gap: 10px;
   padding-left: 10px;
 
-  background-color: white;
+  background-color: ${(props) => props.theme.WHITE};
   border-radius: 10px;
 `;
 
@@ -117,7 +117,7 @@ const TodoEditInput = styled.input`
   border: 0;
 
   font-weight: 400;
-  color: gray;
+  color: ${(props) => props.theme.GRAY};
 `;
 
 const TodoText = styled.span<{ isCompleted: Boolean }>`
@@ -148,7 +148,7 @@ const EditButton = styled.button`
   width: 48px;
   height: 24px;
 
-  border: 0.1px solid gray;
+  border: 0.1px solid ${(props) => props.theme.GRAY};
   border-radius: 3px;
 
   cursor: pointer;
@@ -158,7 +158,7 @@ const DeleteButton = styled.button`
   width: 48px;
   height: 24px;
 
-  border: 0.1px solid gray;
+  border: 0.1px solid ${(props) => props.theme.GRAY};
   border-radius: 3px;
 
   cursor: pointer;

@@ -7,7 +7,7 @@ export const Article = styled.article`
   max-width: 100%;
   min-height: 1024px;
 
-  background-color: #f5f5dc;
+  background-color: ${(props) => props.theme.MAIN_B_1};
   border-radius: 10px;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 

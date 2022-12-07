@@ -42,7 +42,7 @@ const Wrapper = styled.div`
   width: 100%;
   height: 80px;
 
-  background-color: #f5f5dc;
+  background-color: ${(props) => props.theme.MAIN_B_1};
 `;
 
 const InputWrapper = styled.div`
@@ -55,7 +55,7 @@ const InputWrapper = styled.div`
 
   border-radius: 10px;
 
-  background-color: white;
+  background-color: ${(props) => props.theme.WHITE};
 `;
 
 const CreationInput = styled.input`
@@ -69,9 +69,9 @@ const CreationButton = styled.button`
   width: 32px;
   height: 32px;
 
-  border: 0.1px solid gray;
+  border: 0.1px solid ${(props) => props.theme.GRAY};
   border-radius: 2px;
-  background-color: #efefef;
+  background-color: ${(props) => props.theme.GRAY_2};
 
   cursor: pointer;
 `;

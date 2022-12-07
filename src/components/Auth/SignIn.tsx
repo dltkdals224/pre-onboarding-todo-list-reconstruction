@@ -96,7 +96,7 @@ const SignInInput = styled.input`
   padding: 12px 15px;
   margin: 8px 0;
 
-  background-color: #eee;
+  background-color: ${(props) => props.theme.WHITE_2};
   border: none;
 `;
 
@@ -105,16 +105,18 @@ const SignInButton = styled.button`
   margin-top: 24px;
 
   border-radius: 20px;
-  border: 1px solid #ff4b2b;
-  background-color: #ff4b2b;
+  border: 1px solid ${(props) => props.theme.MAIN_B_2};
+  background-color: ${(props) => props.theme.MAIN_B_2};
 
-  color: #ffffff;
+  color: ${(props) => props.theme.WHITE};
   font-size: 12px;
   font-weight: bold;
   letter-spacing: 1px;
   text-transform: uppercase;
 
   transition: transform 80ms ease-in;
+
+  cursor: pointer;
 
   :active {
     transform: scale(0.95);
