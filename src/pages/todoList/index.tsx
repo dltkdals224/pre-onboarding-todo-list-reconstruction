@@ -4,14 +4,9 @@ import TodoItem from "../../components/TodoList/TodoItem";
 
 import useGetTodoListQuery from "../../hooks/shared/useGetTodoListQuery";
 
-import * as Style from "./style";
+import { TodoDataObject } from "../../constants/Types";
 
-interface TodoDataObject {
-  id: number;
-  todo: string;
-  isCompleted: boolean;
-  userId: number;
-}
+import * as Style from "./style";
 
 const TodoList = () => {
   const { data: todoList, isLoading, isError } = useGetTodoListQuery();
