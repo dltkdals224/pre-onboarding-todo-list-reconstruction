@@ -1,37 +1,18 @@
-import { useState } from "react";
-import { useMutation, useQueryClient } from "react-query";
 import styled from "styled-components";
 
-import { createTodoApi } from "../../apis/todo";
+import useCreateTodoListQuery from "../../hooks/shared/useCreateTodoListQuery";
+
+import handleKeyDownEnter from "../../utils/HandleKeyDownEnter";
 
 const TodoInput = () => {
-  // custom hook 처리 가능
-  const [creationInputValue, setCreationInputValue] = useState("");
-
-  const useCreateTodo = () => {
-    const queryClient = useQueryClient();
-
-    return useMutation(async () => await createTodoApi(creationInputValue), {
-      onSuccess: () => {
-        queryClient.refetchQueries(["todoList"]);
-      },
-    });
-  };
-  const creationTrigger = useCreateTodo();
-  const createTodo = () => {
-    creationTrigger.mutate();
-    setCreationInputValue("");
-  };
-  //
-
-  const handleCreationInputChange = (e: any) => {
-    setCreationInputValue(e.target.value);
-  };
+  const {
+    creationInputValue,
+    handleChange: handleCreationInputChange,
+    createTodo,
+  } = useCreateTodoListQuery();
 
   const handleCreationInputKeyDown = (e: any) => {
-    if (e.key === "Enter" && e.nativeEvent.isComposing === false) {
-      createTodo();
-    }
+    handleKeyDownEnter(e, createTodo);
   };
 
   return (
