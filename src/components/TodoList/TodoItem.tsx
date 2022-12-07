@@ -1,71 +1,36 @@
+import { KeyboardEvent } from "react";
 import { useState } from "react";
-import { useMutation, useQueryClient } from "react-query";
 import styled, { css } from "styled-components";
 
-import { updateTodoApi, deleteTodoApi } from "../../apis/todo";
-
 import useFocus from "../../hooks/useFocus";
+import useEditTodoListQuery from "../../hooks/shared/useEditTodoListQuery";
+import useDeleteTodoListQuery from "../../hooks/shared/useDeleteTodoListQuery";
+
+import handleKeyDownEnter from "../../utils/HandleKeyDownEnter";
 
 const TodoItem = ({ data }: { data: any }) => {
-  const [isEditMode, setIsEditMode] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
   const { ref: inputFocusRef, setIsFocused } = useFocus(false);
 
-  // handleChange,
-  const [editInputValue, setEditInputValue] = useState(data.todo);
-  const handleChange = (e: any) => {
-    setEditInputValue(e.target.value);
+  const { handleChange: handleEditionChange, editTodo } = useEditTodoListQuery(
+    data.id,
+    data.todo
+  );
+  const { deleteTodo } = useDeleteTodoListQuery(data.id);
+
+  const handleEditionInputKeyDown = (e: any) => {
+    handleKeyDownEnter(e, completeEdit);
   };
 
-  const useEditTodo = () => {
-    const queryClient = useQueryClient();
-
-    return useMutation(
-      async (type) => await updateTodoApi(data.id, editInputValue, type),
-      {
-        onSuccess: () => {
-          queryClient.refetchQueries(["todoList"]);
-        },
-      }
-    );
-  };
-
-  const editionTrigger = useEditTodo();
-  const editTodo = (type: any) => {
-    editionTrigger.mutate(type);
-  };
-
-  //
-
-  const useDeleteTodo = () => {
-    const queryClient = useQueryClient();
-
-    return useMutation(async () => await deleteTodoApi(data.id), {
-      onSuccess: () => {
-        queryClient.refetchQueries(["todoList"]);
-      },
-    });
-  };
-  const deletionTrigger = useDeleteTodo();
-  const deleteTodo = () => {
-    deletionTrigger.mutate();
-  };
-
-  //
   const operateEdit = () => {
-    setIsEditMode(true);
+    setIsEditing(true);
     setIsFocused(true);
   };
 
   const completeEdit = () => {
     setIsFocused(false);
     editTodo(data.isCompleted);
-    setIsEditMode(false);
-  };
-
-  const handleEditionInputKeyDown = (e: any) => {
-    if (e.key === "Enter" && e.nativeEvent.isComposing === false) {
-      completeEdit();
-    }
+    setIsEditing(false);
   };
 
   return (
@@ -79,10 +44,10 @@ const TodoItem = ({ data }: { data: any }) => {
           }}
         />
 
-        {isEditMode ? (
+        {isEditing ? (
           <TodoEditInput
             ref={inputFocusRef}
-            onChange={handleChange}
+            onChange={handleEditionChange}
             onKeyDown={handleEditionInputKeyDown}
             defaultValue={data.todo}
           />
@@ -92,8 +57,8 @@ const TodoItem = ({ data }: { data: any }) => {
       </InnerWrapper>
 
       <ButtonWrapper>
-        <EditButton onClick={isEditMode ? completeEdit : operateEdit}>
-          {isEditMode ? `완료` : `수정`}
+        <EditButton onClick={isEditing ? completeEdit : operateEdit}>
+          {isEditing ? `완료` : `수정`}
         </EditButton>
 
         <DeleteButton onClick={deleteTodo}>삭제</DeleteButton>
