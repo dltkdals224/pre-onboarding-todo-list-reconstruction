@@ -2,7 +2,7 @@
 import { useLayoutEffect, useRef, useState } from "react";
 
 const useFocus = (defaultFocused = false) => {
-  const ref = useRef<any>();
+  const ref = useRef<HTMLInputElement>(null);
   const [isFocused, setIsFocused] = useState(defaultFocused);
 
   useLayoutEffect(() => {

@@ -1,15 +1,15 @@
-import { KeyboardEvent } from "react";
-import { useState } from "react";
+import { KeyboardEventHandler, useState } from "react";
 import styled, { css } from "styled-components";
 
 import useFocus from "../../hooks/useFocus";
 import useEditTodoListQuery from "../../hooks/shared/useEditTodoListQuery";
 import useDeleteTodoListQuery from "../../hooks/shared/useDeleteTodoListQuery";
 
-import handleKeyDownEnter from "../../utils/HandleKeyDownEnter";
+import { TodoDataObject } from "../../constants/Types";
 
-const TodoItem = ({ data }: { data: any }) => {
+const TodoItem = ({ data }: { data: TodoDataObject }) => {
   const [isEditing, setIsEditing] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
   const { ref: inputFocusRef, setIsFocused } = useFocus(false);
 
   const { handleChange: handleEditionChange, editTodo } = useEditTodoListQuery(
@@ -18,8 +18,12 @@ const TodoItem = ({ data }: { data: any }) => {
   );
   const { deleteTodo } = useDeleteTodoListQuery(data.id);
 
-  const handleEditionInputKeyDown = (e: any) => {
-    handleKeyDownEnter(e, completeEdit);
+  const handleEditionInputKeyDown: KeyboardEventHandler<HTMLInputElement> = (
+    event
+  ) => {
+    if (event.code === "Enter" && event.nativeEvent.isComposing === false) {
+      completeEdit();
+    }
   };
 
   const operateEdit = () => {
@@ -31,6 +35,11 @@ const TodoItem = ({ data }: { data: any }) => {
     setIsFocused(false);
     editTodo(data.isCompleted);
     setIsEditing(false);
+  };
+
+  const operateDelete = () => {
+    setIsDisabled(true);
+    deleteTodo();
   };
 
   return (
@@ -61,7 +70,9 @@ const TodoItem = ({ data }: { data: any }) => {
           {isEditing ? `완료` : `수정`}
         </EditButton>
 
-        <DeleteButton onClick={deleteTodo}>삭제</DeleteButton>
+        <DeleteButton onClick={operateDelete} disabled={isDisabled}>
+          삭제
+        </DeleteButton>
       </ButtonWrapper>
     </Wrapper>
   );

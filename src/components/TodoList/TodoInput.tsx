@@ -1,8 +1,7 @@
+import { KeyboardEventHandler } from "react";
 import styled from "styled-components";
 
 import useCreateTodoListQuery from "../../hooks/shared/useCreateTodoListQuery";
-
-import handleKeyDownEnter from "../../utils/HandleKeyDownEnter";
 
 const TodoInput = () => {
   const {
@@ -11,8 +10,12 @@ const TodoInput = () => {
     createTodo,
   } = useCreateTodoListQuery();
 
-  const handleCreationInputKeyDown = (e: any) => {
-    handleKeyDownEnter(e, createTodo);
+  const handleCreationInputKeyDown: KeyboardEventHandler<HTMLInputElement> = (
+    event
+  ) => {
+    if (event.code === "Enter" && event.nativeEvent.isComposing === false) {
+      createTodo();
+    }
   };
 
   return (

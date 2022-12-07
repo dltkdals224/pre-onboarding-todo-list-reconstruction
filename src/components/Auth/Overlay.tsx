@@ -5,9 +5,9 @@ const Overlay = ({
   setSignInForm,
   setSignUpForm,
 }: {
-  isDefaultForm: any;
-  setSignInForm: any;
-  setSignUpForm: any;
+  isDefaultForm: boolean;
+  setSignInForm: Function;
+  setSignUpForm: Function;
 }) => {
   const handleClick = () => {
     if (isDefaultForm) {
@@ -39,7 +39,7 @@ const Overlay = ({
 
 export default Overlay;
 
-const Section = styled.section<{ isDefaultForm: any }>`
+const Section = styled.section<{ isDefaultForm: boolean }>`
   position: absolute;
   top: 0;
 

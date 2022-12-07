@@ -1,7 +1,11 @@
 import { useCallback, useState } from "react";
 
-export const useFormShown = (initialValue: any) => {
-  const [isDefaultForm, setIsDefaultForm] = useState(initialValue ?? true);
+export const useFormShown = (
+  initialValue: boolean
+): [boolean, Function, Function] => {
+  const [isDefaultForm, setIsDefaultForm] = useState<boolean>(
+    initialValue ?? true
+  );
 
   const setSignInForm = useCallback(() => {
     setIsDefaultForm(true);
