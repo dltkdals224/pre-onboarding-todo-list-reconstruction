@@ -6,8 +6,7 @@ export const Article = styled.article`
   min-width: 768px;
   max-width: 100%;
 
-  height: 1024px;
-  max-height: 100%;
+  height: 768px;
 
   background-color: ${(props) => props.theme.MAIN_B_1};
   border-radius: 10px;
@@ -22,7 +21,7 @@ export const Article = styled.article`
 `;
 
 export const TodoList = styled.section`
-  height: 944px;
+  height: 688px;
 
   overflow-y: scroll;
 `;

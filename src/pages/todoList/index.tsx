@@ -6,10 +6,16 @@ import useGetTodoListQuery from "../../hooks/shared/useGetTodoListQuery";
 
 import { TodoDataObject } from "../../constants/Types";
 
+import Loader from "../../components/common/Loader";
+
 import * as Style from "./style";
 
 const TodoList = () => {
-  const { data: todoList, isLoading, isError } = useGetTodoListQuery();
+  const { data: todoList, isLoading } = useGetTodoListQuery();
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <Style.Article>
