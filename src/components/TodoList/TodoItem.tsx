@@ -88,6 +88,8 @@ const Wrapper = styled.div`
   width: 100%;
   height: 60px;
 
+  margin-bottom: 10px;
+
   background-color: ${(props) => props.theme.MAIN_B_1};
 `;
 

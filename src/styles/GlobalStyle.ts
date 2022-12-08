@@ -13,8 +13,6 @@ body {
 	justify-content: center;
 	align-items: center;
 
-	margin: -20px 0 50px;
-
 	font-family: 'Montserrat', sans-serif;
 }
 
