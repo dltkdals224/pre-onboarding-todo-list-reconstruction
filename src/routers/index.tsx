@@ -9,6 +9,8 @@ import RequireAuth from "../utils/RequireAuth";
 
 import { ROUTE_URL } from "../constants/Route";
 
+import NotFound from "../components/common/NotFound";
+
 import Auth from "../pages/auth";
 import TodoList from "../pages/todoList";
 
@@ -31,6 +33,8 @@ const Routers = () => {
         >
           <Route path={ROUTE_URL.TODO} element={<TodoList />} />
         </RoutePermission>
+
+        <Route path={ROUTE_URL.ALL} element={<NotFound />} />
       </Routes>
     </Router>
   );
