@@ -12,7 +12,7 @@ const Logout = () => {
 
 export default Logout;
 
-const Wrapper = styled.div`
+const Wrapper = styled.section`
   display: flex;
   justify-content: flex-end;
   align-items: center;

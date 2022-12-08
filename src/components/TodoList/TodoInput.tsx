@@ -36,11 +36,11 @@ const TodoInput = () => {
 
 export default TodoInput;
 
-const Wrapper = styled.div`
+const Wrapper = styled.section`
   ${(props) => props.theme.FLEX_CENTER}
 
   width: 100%;
-  height: 80px;
+  height: 60px;
 
   background-color: ${(props) => props.theme.MAIN_B_1};
 `;
@@ -51,7 +51,7 @@ const InputWrapper = styled.div`
   align-items: center;
 
   width: 704px;
-  height: 60px;
+  height: 40px;
 
   border-radius: 10px;
 
@@ -60,14 +60,14 @@ const InputWrapper = styled.div`
 
 const CreationInput = styled.input`
   width: 640px;
-  height: 32px;
+  height: 24px;
 
   border: 0px;
 `;
 
 const CreationButton = styled.button`
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
 
   border: 0.1px solid ${(props) => props.theme.GRAY};
   border-radius: 2px;

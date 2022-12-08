@@ -5,7 +5,9 @@ export const Article = styled.article`
 
   min-width: 768px;
   max-width: 100%;
-  min-height: 1024px;
+  height: 75%;
+  min-height: 512px;
+  max-height: 100%;
 
   background-color: ${(props) => props.theme.MAIN_B_1};
   border-radius: 10px;
@@ -19,8 +21,15 @@ export const Article = styled.article`
   -o-animation: fadein 1s; /* Opera */
 `;
 
-export const TodoList = styled.div`
-  max-height: 924px;
+export const TodoList = styled.section`
+  display: flex;
+  flex-direction: column;
 
-  overflow-y: auto;
+  height: 80%;
+  min-height: 432px;
+  max-height: 1024px;
+
+  gap: 10px;
+
+  overflow-y: scroll;
 `;

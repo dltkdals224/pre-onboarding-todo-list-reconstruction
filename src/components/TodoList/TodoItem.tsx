@@ -86,7 +86,7 @@ const Wrapper = styled.div`
   align-items: center;
 
   width: 100%;
-  height: 80px;
+  height: 60px;
 
   background-color: ${(props) => props.theme.MAIN_B_1};
 `;
@@ -96,8 +96,8 @@ const InnerWrapper = styled.div`
   justify-content: flex-start;
   align-items: center;
 
-  width: 640px;
-  height: 60px;
+  width: 650px;
+  height: 50px;
 
   gap: 10px;
   padding-left: 10px;
@@ -135,8 +135,8 @@ const ButtonWrapper = styled.div`
   ${(props) => props.theme.FLEX_CENTER}
   flex-direction:column;
 
-  width: 64px;
-  height: 60px;
+  width: 54px;
+  height: 50px;
 
   gap: 5px;
 
@@ -145,8 +145,8 @@ const ButtonWrapper = styled.div`
 `;
 
 const EditButton = styled.button`
-  width: 48px;
-  height: 24px;
+  width: 40px;
+  height: 20px;
 
   border: 0.1px solid ${(props) => props.theme.GRAY};
   border-radius: 3px;
@@ -155,8 +155,8 @@ const EditButton = styled.button`
 `;
 
 const DeleteButton = styled.button`
-  width: 48px;
-  height: 24px;
+  width: 40px;
+  height: 20px;
 
   border: 0.1px solid ${(props) => props.theme.GRAY};
   border-radius: 3px;

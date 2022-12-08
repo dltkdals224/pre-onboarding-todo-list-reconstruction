@@ -9,17 +9,19 @@ ${reset}
 
 body {
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	flex-direction: column;
-	font-family: 'Montserrat', sans-serif;
-	height: 100vh;
+
 	margin: -20px 0 50px;
+
+	font-family: 'Montserrat', sans-serif;
 }
 
 h1 {
-	font-weight: bold;
 	margin: 0;
+
+	font-weight: bold;
 }
 
 h2 {
@@ -27,11 +29,12 @@ h2 {
 }
 
 p {
+	margin: 20px 0 30px;
+
 	font-size: 14px;
 	font-weight: 100;
 	line-height: 20px;
 	letter-spacing: 0.5px;
-	margin: 20px 0 30px;
 }
 
 span {
@@ -39,9 +42,10 @@ span {
 }
 
 a {
+	margin: 15px 0;
+    
 	font-size: 14px;
 	text-decoration: none;
-	margin: 15px 0;
 }
 
 .page {
