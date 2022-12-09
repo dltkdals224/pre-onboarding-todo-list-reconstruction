@@ -1,6 +1,6 @@
-import Routers from "./routers";
-
 import { QueryClient, QueryClientProvider } from "react-query";
+
+import Routers from "./routers";
 
 const queryClient = new QueryClient({
   defaultOptions: {

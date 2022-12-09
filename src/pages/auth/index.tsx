@@ -9,9 +9,6 @@ import * as Style from "./style";
 const Auth = () => {
   const [isDefaultForm, setSignInForm, setSignUpForm] = useFormShown(false);
 
-  // 5. 웹 최적화
-  // 6. 배포 , readme.md
-
   return (
     <Style.Article>
       <SignIn isDefaultForm={isDefaultForm} />
