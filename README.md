@@ -2,6 +2,8 @@
 
 > 프로젝트 기간 : 2022년 12월 1일 ~ 2022년 12월 9일
 >
+> 진행 인원 : 1인 (개인)
+>
 > #### [배포링크](https://wanted-dnc-3.herokuapp.com/)
 
 </br>
@@ -16,33 +18,37 @@ $ npm run dev
 
 </br>
 
-## Best Practice 및 채택 근거
-
-router 권한 처리
-react-hook-form
-react-query
-custom-hook 처리
-메모이제이션
+## 🧚🏻‍♂️ 적용 기술 및 채택 근거
 
 ### 1. TypeScript
 
-- [ ]
+- [ ] TypeScript는 정적타입을 지원하여 컴파일 단계에서 오류를 포착할 수 있게 해줍니다.
+명시적인 정적 타입 지정은 개발자의 의도를 명확하게 코드로 기술할 수 있게 해줍니다.
+이는 코드의 가독성을 높이고 디버깅을 쉽게 합니다.
 
 <br/>
 
 ### 2. router 권한 처리
 
-- [ ]
+https://github.com/dltkdals224/pre-onboarding-todo-list-reconstruction/blob/main/src/utils/RequireAuth.tsx#L1-L23
+
+- [ ] 
 
 <br/>
 
 ### 3. react-hook-form
+
+https://github.com/dltkdals224/pre-onboarding-todo-list-reconstruction/blob/main/src/components/Auth/SignIn.tsx#L1-L58
+
+https://github.com/dltkdals224/pre-onboarding-todo-list-reconstruction/blob/main/src/constants/Authentication.ts#L1-L43
 
 - [ ]
 
 <br/>
 
 ### 4. react-query
+
+https://github.com/dltkdals224/pre-onboarding-todo-list-reconstruction/blob/main/src/hooks/shared/useGetTodoListQuery.tsx#L1-L15
 
 - [ ]
 
