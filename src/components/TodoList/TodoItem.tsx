@@ -1,4 +1,4 @@
-import { KeyboardEventHandler, useState } from "react";
+import React, { KeyboardEventHandler, useState } from "react";
 import styled, { css } from "styled-components";
 
 import useFocus from "../../hooks/useFocus";
@@ -78,7 +78,7 @@ const TodoItem = ({ data }: { data: TodoDataObject }) => {
   );
 };
 
-export default TodoItem;
+export default React.memo(TodoItem);
 
 const Wrapper = styled.div`
   display: flex;
