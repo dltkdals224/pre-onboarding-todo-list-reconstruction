@@ -22,7 +22,9 @@ $ npm run dev
 
 ### 1. TypeScript
 
-- [ ] TypeScript는 정적타입을 지원하여 컴파일 단계에서 오류를 포착할 수 있게 해줍니다.
+- 타입 안정성 제공
+
+TypeScript는 정적타입을 지원하여 컴파일 단계에서 오류를 포착할 수 있게 해줍니다.
 명시적인 정적 타입 지정은 개발자의 의도를 명확하게 코드로 기술할 수 있게 해줍니다.
 이는 코드의 가독성을 높이고 디버깅을 쉽게 합니다.
 
@@ -30,39 +32,48 @@ $ npm run dev
 
 ### 2. router 권한 처리
 
-https://github.com/dltkdals224/pre-onboarding-todo-list-reconstruction/blob/main/src/utils/RequireAuth.tsx#L1-L23
+https://github.com/dltkdals224/pre-onboarding-todo-list-reconstruction/blob/3b3e7f2ead02a621d1491a6e1f4a9e03c708835e/src/routers/index.tsx#L1-L43
 
-- [ ] 
+https://github.com/dltkdals224/pre-onboarding-todo-list-reconstruction/blob/3b3e7f2ead02a621d1491a6e1f4a9e03c708835e/src/utils/RequireAuth.tsx#L1-L22
+
+- 2
 
 <br/>
 
 ### 3. react-hook-form
 
-https://github.com/dltkdals224/pre-onboarding-todo-list-reconstruction/blob/main/src/components/Auth/SignIn.tsx#L1-L58
+https://github.com/dltkdals224/pre-onboarding-todo-list-reconstruction/blob/3b3e7f2ead02a621d1491a6e1f4a9e03c708835e/src/components/Auth/SignIn.tsx#L1-L58
 
-https://github.com/dltkdals224/pre-onboarding-todo-list-reconstruction/blob/main/src/constants/Authentication.ts#L1-L43
+https://github.com/dltkdals224/pre-onboarding-todo-list-reconstruction/blob/3b3e7f2ead02a621d1491a6e1f4a9e03c708835e/src/constants/Authentication.ts#L1-L42
 
-- [ ]
+- 3
 
 <br/>
 
 ### 4. react-query
 
-https://github.com/dltkdals224/pre-onboarding-todo-list-reconstruction/blob/main/src/hooks/shared/useGetTodoListQuery.tsx#L1-L15
+https://github.com/dltkdals224/pre-onboarding-todo-list-reconstruction/blob/3b3e7f2ead02a621d1491a6e1f4a9e03c708835e/src/hooks/shared/useGetTodoListQuery.ts#L1-L14
 
-- [ ]
+- 4
 
 <br/>
 
 ### 5. custom-hook 처리
 
-- [ ]
+https://github.com/dltkdals224/pre-onboarding-todo-list-reconstruction/blob/3b3e7f2ead02a621d1491a6e1f4a9e03c708835e/src/hooks/useFocus.ts#L1-L25
+
+https://github.com/dltkdals224/pre-onboarding-todo-list-reconstruction/blob/3b3e7f2ead02a621d1491a6e1f4a9e03c708835e/src/hooks/useFormShown.ts#L1-L19
+
+
+- 5
 
 <br/>
 
 ### 6. optimization
 
-- [ ]
+https://github.com/dltkdals224/pre-onboarding-todo-list-reconstruction/blob/3b3e7f2ead02a621d1491a6e1f4a9e03c708835e/src/components/TodoList/TodoItem.tsx#L80-L82
+
+- 6
 
 <br/>
 
