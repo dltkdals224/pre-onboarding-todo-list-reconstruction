@@ -4,7 +4,7 @@
 >
 > 진행 인원 : 1인 (개인)
 >
-> #### [배포링크]([https://wanted-dnc-3.herokuapp.com/](https://famous-lily-b50252.netlify.app/))
+> #### [배포링크](https://famous-lily-b50252.netlify.app/)
 
 </br>
 
