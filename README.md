@@ -1,4 +1,4 @@
-# 원티드 프리온보딩 Assignment #1 (TodoList) Reconstruction
+# 프리온보딩 Assignment - TodoList Reconstruction
 
 > 프로젝트 기간 : 2022년 12월 1일 ~ 2022년 12월 9일
 >
